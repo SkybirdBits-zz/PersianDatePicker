@@ -53,7 +53,7 @@ afterEvaluate{
                 groupId = libGroupId
                 artifactId = libArtifactId
                 version = libVersion
-                artifact("$buildDir/outputs/aar/PersianDatePicker-release.aar")
+                artifact("$buildDir/outputs/aar/lib-release.aar")
 
             }
         }

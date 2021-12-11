@@ -2,9 +2,9 @@
 buildscript {
     ext{
         kotlin_version = '1.6.0'
-        libGroupId = 'com.skybirdbits'
-        libArtifactId = 'persiandatepicker'
-        libVersion = '0.0.1'
+        PUBLISH_GROUP_ID = 'com.skybirdbits'
+        PUBLISH_ARTIFACT_ID = 'persiandatepicker'
+        PUBLISH_VERSION = '0.0.1'
     }
     repositories {
         google()

@@ -10,7 +10,7 @@ android {
         minSdk 22
         targetSdk 31
         versionCode 1
-        versionName libVersion
+        versionName PUBLISH_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,11 +22,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions{
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 
@@ -47,21 +47,19 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
 }
 
-
 afterEvaluate{
     publishing {
         publications{
             release(MavenPublication) {
-                groupId = libGroupId
-                artifactId = libArtifactId
-                version = libVersion
+                groupId = PUBLISH_GROUP_ID
+                artifactId = PUBLISH_ARTIFACT_ID
+                version = PUBLISH_VERSION
                 artifact("$buildDir/outputs/aar/lib-release.aar")
 
             }
         }
 
         repositories{
-
 
             maven{
                 name ="persiandatepicker"

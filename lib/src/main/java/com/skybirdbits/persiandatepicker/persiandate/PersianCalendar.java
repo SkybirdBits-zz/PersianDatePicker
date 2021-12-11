@@ -242,8 +242,8 @@ public class PersianCalendar {
     public String getNumericDate() {
 
         String yearString = String.valueOf(getYear());
-        String monthString = getMonthOfYear() < 10 ? "0" + monthOfYear : String.valueOf(monthOfYear);
-        String dayString = getDayOfMonth() < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+        String monthString = getMonthOfYear() < 10 ? ("0" + monthOfYear) : String.valueOf(monthOfYear);
+        String dayString = getDayOfMonth() < 10 ? ("0" + dayOfMonth) : String.valueOf(dayOfMonth);
 
         return String.format(Locale.getDefault(),
                 "%4s/%2s/%2s", yearString, monthString, dayString);

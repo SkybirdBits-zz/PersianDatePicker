@@ -122,7 +122,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     oneMonthInYear.days[0]
                 )
 
-            firstDayOfCurrentMonthDate!!.isFarsiSupport = farsi
+            firstDayOfCurrentMonthDate!!.isLanguageFarsi = farsi
 
             setDayOfMonths(onDaySelectListener)
             setYearAndMonth()

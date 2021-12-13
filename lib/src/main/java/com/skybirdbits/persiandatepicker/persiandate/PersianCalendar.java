@@ -23,7 +23,7 @@ public class PersianCalendar {
         fromGregorian(new GregorianCalendar());
     }
 
-    private boolean mFarsiSupport;
+    private boolean mLanguageFarsi;
 
     public PersianCalendar(int year, int monthOfYear, int dayOfMonth) {
         set(year, monthOfYear, dayOfMonth);
@@ -78,12 +78,12 @@ public class PersianCalendar {
         fromGregorian(gregorian);
     }
 
-    public boolean isFarsiSupport() {
-        return mFarsiSupport;
+    public boolean isLanguageFarsi() {
+        return mLanguageFarsi;
     }
 
-    public void setFarsiSupport(boolean farsiSupport) {
-        this.mFarsiSupport = farsiSupport;
+    public void setLanguageFarsi(boolean languageFarsi) {
+        this.mLanguageFarsi = languageFarsi;
     }
 
     public int getHour() {
@@ -177,7 +177,7 @@ public class PersianCalendar {
     }
 
     public String getNameOfDayWeek() {
-        return getNameOfDayWeek(mFarsiSupport);
+        return getNameOfDayWeek(mLanguageFarsi);
     }
 
     /**
@@ -190,7 +190,7 @@ public class PersianCalendar {
     }
 
     public String getNameOfMonthYear() {
-        return getNameOfMonthYear(mFarsiSupport);
+        return getNameOfMonthYear(mLanguageFarsi);
     }
 
 

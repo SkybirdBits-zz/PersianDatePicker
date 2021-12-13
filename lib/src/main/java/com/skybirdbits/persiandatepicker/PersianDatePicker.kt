@@ -63,7 +63,7 @@ class PersianDatePicker(private val context: Context) {
 
     var dimAmount = 1f
 
-    var farsiSupport = true
+    var languageFarsi = true
 
     init {
         createCalendarView()
@@ -117,7 +117,7 @@ class PersianDatePicker(private val context: Context) {
 
     private fun onConfigCalendarView() {
 
-        _root.layoutDirection = if (farsiSupport) {
+        _root.layoutDirection = if (languageFarsi) {
             negativeButton.text = context.getString(R.string.cancel)
             positiveButton.text = context.getString(R.string.ok)
             View.LAYOUT_DIRECTION_RTL
@@ -130,12 +130,12 @@ class PersianDatePicker(private val context: Context) {
 
 
         val today = PersianCalendar()
-        today.isFarsiSupport = farsiSupport
+        today.isLanguageFarsi = languageFarsi
         todayMonthAndDayTextView.text = today.toString()
         todayYearTextView.text = today.year.toString()
 
         datePickerScope.launch {
-            adapter.farsi = farsiSupport
+            adapter.farsi = languageFarsi
             adapter.init().collect {
                 if (it)
                     withContext(Dispatchers.Main) {

@@ -23,6 +23,7 @@ public class PersianCalendar {
         fromGregorian(new GregorianCalendar());
     }
 
+    private boolean mFarsiSupport;
 
     public PersianCalendar(int year, int monthOfYear, int dayOfMonth) {
         set(year, monthOfYear, dayOfMonth);
@@ -77,6 +78,13 @@ public class PersianCalendar {
         fromGregorian(gregorian);
     }
 
+    public boolean isFarsiSupport() {
+        return mFarsiSupport;
+    }
+
+    public void setFarsiSupport(boolean farsiSupport) {
+        this.mFarsiSupport = farsiSupport;
+    }
 
     public int getHour() {
         return toGregorian().get(Calendar.HOUR_OF_DAY);
@@ -162,27 +170,27 @@ public class PersianCalendar {
      * @return day name
      */
 
-    public String getNameOfDayWeek(Locale locale) {
-        return locale.equals(PersianCalendarLocales.FARSI) ?
+    public String getNameOfDayWeek(boolean supportFarsi) {
+        return supportFarsi ?
                 DateConstantsKt.getWeekDayNames()[getDayOfWeek() - 1] : DateConstantsKt.getWeekDayNamesLatin()[getDayOfWeek() - 1];
 
     }
 
     public String getNameOfDayWeek() {
-        return getNameOfDayWeek(PersianCalendarLocales.getInstance().getLocale());
+        return getNameOfDayWeek(mFarsiSupport);
     }
 
     /**
      * @return month name
      */
 
-    public String getNameOfMonthYear(Locale locale) {
-        return locale.equals(PersianCalendarLocales.FARSI) ? DateConstantsKt.getMonthNames()[getMonthOfYear() - 1]
+    public String getNameOfMonthYear(boolean supportFarsi) {
+        return supportFarsi ? DateConstantsKt.getMonthNames()[getMonthOfYear() - 1]
                 : DateConstantsKt.getMonthNamesLatin()[getMonthOfYear() - 1];
     }
 
     public String getNameOfMonthYear() {
-        return getNameOfMonthYear(PersianCalendarLocales.getInstance().getLocale());
+        return getNameOfMonthYear(mFarsiSupport);
     }
 
 

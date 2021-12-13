@@ -16,7 +16,6 @@ import com.skybirdbits.persiandatepicker.adapter.CalendarAdapter
 import com.skybirdbits.persiandatepicker.adapter.OnDaySelectListener
 import com.skybirdbits.persiandatepicker.adapter.currentItemPosition
 import com.skybirdbits.persiandatepicker.persiandate.PersianCalendar
-import com.skybirdbits.persiandatepicker.persiandate.PersianCalendarLocales
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -34,8 +33,6 @@ class PersianDatePicker(private val context: Context) {
 
     //A coroutine scope for asynchronous tasks
     private val datePickerScope = CoroutineScope(Dispatchers.Default)
-
-    val calendarLocales: PersianCalendarLocales = PersianCalendarLocales.getInstance()
 
     //Parent of the dialog which shows on it
     private var _parent: ViewGroup? = null
@@ -66,6 +63,7 @@ class PersianDatePicker(private val context: Context) {
 
     var dimAmount = 1f
 
+    var farsiSupport = true
 
     init {
         createCalendarView()
@@ -75,6 +73,10 @@ class PersianDatePicker(private val context: Context) {
         initialize View of the calendar and set data to that it's called inside initCalendar method
         after  data is ready to set
      */
+
+    fun createCalendarView(){
+        onCreateCalendarView()
+    }
 
     private fun onCreateCalendarView(){
         _root = LayoutInflater.from(context)
@@ -103,41 +105,37 @@ class PersianDatePicker(private val context: Context) {
         negativeButton.setOnClickListener { _dialog?.dismiss() }
         positiveButton.setOnClickListener { _dialog?.dismiss() }
 
-        onConfigCalendarView()
-
-    }
-
-    fun createCalendarView(){
-        onCreateCalendarView()
-    }
-
-    private fun onConfigCalendarView() {
-
-        _root.layoutDirection = if (calendarLocales.locale == PersianCalendarLocales.FARSI)
-            View.LAYOUT_DIRECTION_RTL
-        else View.LAYOUT_DIRECTION_LTR
-
-        val today = PersianCalendar()
-        todayMonthAndDayTextView.text = today.toString()
-        todayYearTextView.text = today.year.toString()
-
         onAttachCalendarView()
-    }
-
-    private fun configCalendarView(){
-        onConfigCalendarView()
     }
 
     private fun onAttachCalendarView() {
         val builder = AlertDialog.Builder(context)
         _dialog = builder.setView(_root).create()
+
+        onConfigCalendarView()
     }
 
-    fun show() {
-        //call onConfig function to make sure locale changes affected
-        configCalendarView()
+    private fun onConfigCalendarView() {
+
+        _root.layoutDirection = if (farsiSupport) {
+            negativeButton.text = context.getString(R.string.cancel)
+            positiveButton.text = context.getString(R.string.ok)
+            View.LAYOUT_DIRECTION_RTL
+        }
+            else{
+                negativeButton.text = context.getString(R.string.cancel_latin)
+                positiveButton.text = context.getString(R.string.ok_latin)
+                View.LAYOUT_DIRECTION_LTR
+        }
+
+
+        val today = PersianCalendar()
+        today.isFarsiSupport = farsiSupport
+        todayMonthAndDayTextView.text = today.toString()
+        todayYearTextView.text = today.year.toString()
 
         datePickerScope.launch {
+            adapter.farsi = farsiSupport
             adapter.init().collect {
                 if (it)
                     withContext(Dispatchers.Main) {
@@ -146,7 +144,17 @@ class PersianDatePicker(private val context: Context) {
                     }
             }
         }
+    }
 
+    private fun configCalendarView(){
+        onConfigCalendarView()
+    }
+
+
+
+    fun show() {
+        //call onConfig function to make sure locale changes affected
+        configCalendarView()
 
         _dialog?.show()
 

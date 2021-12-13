@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.skybirdbits.persiandatepicker.persiandate.OneMonthInYear
 import com.skybirdbits.persiandatepicker.R
-import com.skybirdbits.persiandatepicker.persiandate.PersianCalendarLocales
 import com.skybirdbits.persiandatepicker.persiandate.PersianCalendar
 import com.skybirdbits.persiandatepicker.utils.getCalendarMonthList
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +31,8 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
     var minYear: Int = 1360
     var maxYear: Int = 1460
 
+    var farsi = true
+
     fun init(): Flow<Boolean> = flow {
         submitCalendarMonths(minYear, maxYear)
         emit(true)
@@ -39,7 +40,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMonthViewHolder {
         val view =
-            if (PersianCalendarLocales.getInstance().locale == PersianCalendarLocales.FARSI)
+            if (farsi)
             LayoutInflater.from(parent.context).inflate(R.layout.list_item_month, parent, false)
         else LayoutInflater.from(parent.context).inflate(R.layout.list_item_month_latin , parent , false)
 
@@ -63,13 +64,17 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
     @SuppressLint("NotifyDataSetChanged")
     private suspend fun submitCalendarMonths(minYear: Int, maxYear: Int) {
-        withContext(Dispatchers.Default) {
-            monthList = getCalendarMonthList(minYear, maxYear) as MutableList<OneMonthInYear>
-            withContext(Dispatchers.Main) {
-                notifyDataSetChanged()
-                setSelectedDateToCurrentDate()
+        if (currentItemPosition == null && selectedDate == null) {
 
+            withContext(Dispatchers.Default) {
+                monthList = getCalendarMonthList(minYear, maxYear) as MutableList<OneMonthInYear>
+                withContext(Dispatchers.Main) {
+                    notifyDataSetChanged()
+                    setSelectedDateToCurrentDate()
+
+                }
             }
+
         }
     }
 
@@ -116,6 +121,8 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     currentMonth,
                     oneMonthInYear.days[0]
                 )
+
+            firstDayOfCurrentMonthDate!!.isFarsiSupport = farsi
 
             setDayOfMonths(onDaySelectListener)
             setYearAndMonth()

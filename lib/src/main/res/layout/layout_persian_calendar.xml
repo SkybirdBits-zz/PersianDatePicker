@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel_latin"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="8dp"
             android:textColor="@color/lightblue_500_dark"
             style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             />
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ok_latin"
-            android:layout_marginHorizontal="4dp"
+            android:layout_marginHorizontal="8dp"
             android:textColor="@color/lightblue_500_dark"
             style="@style/Widget.MaterialComponents.Button.TextButton.Dialog" />
 

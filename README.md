@@ -93,4 +93,4 @@ datepicker.show()
 
 نمونه
 ----
-<img alt="sample" align="center" src="./sample.png" />
+<img alt="sample" src="./sample.png" />

@@ -73,7 +73,10 @@ datePicker.setDimAmount(0.5f);
 **بستن Dialog و دریافت تاریخ با کلیک روی تایید**
 
 ```
-datePicker.setOnPositiveButtonClickListener(timeMillis -> System.out.println("Time " + timeMillis));
+private PersianCalendar calendar;
+...
+datePicker.setOnPositiveButtonClickListener(timeMillis -> calendar = new PersianCalendar(timeMillis));
+
 ```
 
 **تنظیم زبان تقویم به فارسی و لاتین**

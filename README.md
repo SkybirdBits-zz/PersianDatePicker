@@ -94,11 +94,4 @@ datepicker.show()
 نمونه
 ----
 
-<div>
-    <hr>
-        <img alt="Persian DatePicker for android" src="./sample_latin.png" />
-    </hr>
-    <hr>
-        <img alt="نمونه کتابخانه تقویم فارسی در اندروید" align="right" src="./sample.png"/>
-    </hr>
-</div>
+<img alt="Persian DatePicker for android" src="./sample_latin.png" /><img alt="نمونه کتابخانه تقویم فارسی در اندروید" align="right" src="./sample.png"/>

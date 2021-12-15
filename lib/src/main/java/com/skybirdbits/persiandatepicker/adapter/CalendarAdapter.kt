@@ -10,15 +10,14 @@ import androidx.core.view.get
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
-import com.skybirdbits.persiandatepicker.persiandate.OneMonthInYear
 import com.skybirdbits.persiandatepicker.R
+import com.skybirdbits.persiandatepicker.persiandate.OneMonthInYear
 import com.skybirdbits.persiandatepicker.persiandate.PersianCalendar
 import com.skybirdbits.persiandatepicker.utils.getCalendarMonthList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-
 
 var selectedDate: PersianCalendar? = null
 var currentItemPosition: Int? = null
@@ -31,7 +30,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
     var minYear: Int = 1360
     var maxYear: Int = 1460
 
-    var farsi = true
+    var isFarsi = true
 
     fun init(): Flow<Boolean> = flow {
         submitCalendarMonths(minYear, maxYear)
@@ -39,10 +38,8 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMonthViewHolder {
-        val view =
-            if (farsi)
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item_month, parent, false)
-        else LayoutInflater.from(parent.context).inflate(R.layout.list_item_month_latin , parent , false)
+        val viewResource = if (isFarsi) R.layout.list_item_month else R.layout.list_item_month_latin
+        val view = LayoutInflater.from(parent.context).inflate(viewResource, parent, false)
 
         return ItemMonthViewHolder(view)
     }
@@ -117,7 +114,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     oneMonthInYear.days[0]
                 )
 
-            firstDayOfCurrentMonthDate!!.isLanguageFarsi = farsi
+            firstDayOfCurrentMonthDate!!.isLanguageFarsi = isFarsi
 
             setDayOfMonths(onDaySelectListener)
             setYearAndMonth()

@@ -135,7 +135,7 @@ class PersianDatePicker(private val context: Context) {
         todayYearTextView.text = today.year.toString()
 
         datePickerScope.launch {
-            adapter.farsi = languageFarsi
+            adapter.isFarsi = languageFarsi
             adapter.init().collect {
                 if (it)
                     withContext(Dispatchers.Main) {

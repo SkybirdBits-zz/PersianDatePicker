@@ -74,11 +74,11 @@ class PersianDatePicker(private val context: Context) {
         after  data is ready to set
      */
 
-    fun createCalendarView(){
+    fun createCalendarView() {
         onCreateCalendarView()
     }
 
-    private fun onCreateCalendarView(){
+    private fun onCreateCalendarView() {
         _root = LayoutInflater.from(context)
             .inflate(R.layout.layout_persian_calendar, _parent, false)
 
@@ -121,11 +121,10 @@ class PersianDatePicker(private val context: Context) {
             negativeButton.text = context.getString(R.string.cancel)
             positiveButton.text = context.getString(R.string.ok)
             View.LAYOUT_DIRECTION_RTL
-        }
-            else{
-                negativeButton.text = context.getString(R.string.cancel_latin)
-                positiveButton.text = context.getString(R.string.ok_latin)
-                View.LAYOUT_DIRECTION_LTR
+        } else {
+            negativeButton.text = context.getString(R.string.cancel_latin)
+            positiveButton.text = context.getString(R.string.ok_latin)
+            View.LAYOUT_DIRECTION_LTR
         }
 
 
@@ -146,10 +145,9 @@ class PersianDatePicker(private val context: Context) {
         }
     }
 
-    private fun configCalendarView(){
+    private fun configCalendarView() {
         onConfigCalendarView()
     }
-
 
 
     fun show() {

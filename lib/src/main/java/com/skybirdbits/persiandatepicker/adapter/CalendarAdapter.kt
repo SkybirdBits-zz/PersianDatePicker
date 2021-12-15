@@ -62,11 +62,11 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
     @SuppressLint("NotifyDataSetChanged")
     private suspend fun submitCalendarMonths(minYear: Int, maxYear: Int) {
 
-            withContext(Dispatchers.Default) {
-                monthList = getCalendarMonthList(minYear, maxYear) as MutableList<OneMonthInYear>
-                    setSelectedDateToCurrentDate()
+        withContext(Dispatchers.Default) {
+            monthList = getCalendarMonthList(minYear, maxYear) as MutableList<OneMonthInYear>
+            setSelectedDateToCurrentDate()
 
-            }
+        }
     }
 
     private fun setSelectedDateToCurrentDate() {
@@ -84,11 +84,11 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     break
                 }
             }
-        }else {
-            var index = 0;
-            while (index < monthList.size){
+        } else {
+            var index = 0
+            while (index < monthList.size) {
                 val currentMonth = monthList[index]
-                if (currentMonth.year == selectedDate!!.year && currentMonth.month == selectedDate!!.monthOfYear){
+                if (currentMonth.year == selectedDate!!.year && currentMonth.month == selectedDate!!.monthOfYear) {
                     currentMonth.selected = true
                     break
                 }

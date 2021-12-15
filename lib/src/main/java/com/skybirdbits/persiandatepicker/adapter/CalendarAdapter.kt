@@ -72,7 +72,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
     private suspend fun setSelectedDateToCurrentDate() {
 
-        //withContext(Dispatchers.Default) {
+        withContext(Dispatchers.Default) {
 
             val currentDate = PersianCalendar()
 
@@ -86,7 +86,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     break
                 }
             }
-
+        }
     }
 
     inner class ItemMonthViewHolder(rootView: View) :

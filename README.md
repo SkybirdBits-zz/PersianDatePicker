@@ -2,6 +2,8 @@
  <a href="https://github.com/SkybirdBits/PersianDatePicker"> کتابخانه تقویم فارسی اندروید</a>
 </h1>
 
+[![Persian Calendar Version](https://jitpack.io/v/skybirdbits/persiandatepicker.svg)](https://jitpack.io/#skybirdbits/persiandatepicker)
+
 یک کتابخانه ساده و کاربردی برای نمایش تقویم فارسی به صورت دیالوگ این کتابخانه همانند DatePicker در اندروید است که تاریخ شمسی را به صورت دیالوگ نمایش می دهد
 
 افزودن کتابخانه به پروژه

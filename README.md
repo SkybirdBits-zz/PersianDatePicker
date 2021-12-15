@@ -44,7 +44,7 @@
 
 ```
   dependencies {
-        implementation 'com.github.skybirdbits:persiandatepicker:0.0.4'
+        implementation 'com.github.skybirdbits:persiandatepicker:0.0.3'
    }
  ```
 

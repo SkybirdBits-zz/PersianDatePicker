@@ -2,7 +2,7 @@
 buildscript {
     ext{
         kotlin_version = '1.6.0'
-        //navigation_version = '2.3.5'
+        navigation_version = '2.3.5'
 
         PUBLISH_GROUP_ID = 'com.skybirdbits'
         PUBLISH_ARTIFACT_ID = 'persiandatepicker'
@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.3"
-        //to test project in a module
+        //to test library in an app module
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         // NOTE: Do not place your application dependencies here; they belong

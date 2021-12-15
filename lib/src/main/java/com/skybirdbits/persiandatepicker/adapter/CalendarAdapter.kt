@@ -64,25 +64,21 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
     @SuppressLint("NotifyDataSetChanged")
     private suspend fun submitCalendarMonths(minYear: Int, maxYear: Int) {
-        if (currentItemPosition == null && selectedDate == null) {
 
             withContext(Dispatchers.Default) {
                 monthList = getCalendarMonthList(minYear, maxYear) as MutableList<OneMonthInYear>
-                withContext(Dispatchers.Main) {
-                    notifyDataSetChanged()
+                if (selectedDate == null) {
                     setSelectedDateToCurrentDate()
-
                 }
             }
-
-        }
     }
 
     private suspend fun setSelectedDateToCurrentDate() {
 
-        withContext(Dispatchers.Default) {
-            val currentDate =
-                PersianCalendar()
+        //withContext(Dispatchers.Default) {
+
+            val currentDate = PersianCalendar()
+
             selectedDate = currentDate
 
             for (index in monthList.indices) {
@@ -93,7 +89,6 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
                     break
                 }
             }
-        }
 
     }
 
@@ -107,11 +102,11 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
         private var firstDayOfCurrentMonthDate: PersianCalendar? = null
 
-        private lateinit var mDaysOfOneMonth: OneMonthInYear
+        private lateinit var daysOfOneMonth: OneMonthInYear
 
         fun bind(oneMonthInYear: OneMonthInYear, onDaySelectListener: OnDaySelectListener) {
 
-            this.mDaysOfOneMonth = oneMonthInYear
+            this.daysOfOneMonth = oneMonthInYear
             val currentMonth = oneMonthInYear.month
             val currentYear = oneMonthInYear.year
 
@@ -138,6 +133,7 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
             resetDays()
 
+            //index of days which equals to month's length
             var dayIndex = 0
 
             for (row in 0 until tableLayout.size) {
@@ -152,21 +148,18 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
 
                     val cell = tableRow[col] as MaterialTextView
 
-                    if (dayIndex < mDaysOfOneMonth.days.size) {
+                    if (dayIndex < daysOfOneMonth.days.size) {
 
-                        val day = mDaysOfOneMonth.days[dayIndex++]
+                        val day = daysOfOneMonth.days[dayIndex++]
 
                         cell.text = day.toString()
                         configCellClick(cell, selectListener)
 
-                        if (mDaysOfOneMonth.selected) {
-                            val date = PersianCalendar(
-                                mDaysOfOneMonth.year,
-                                mDaysOfOneMonth.month,
-                                day
-                            )
-                            if (date == selectedDate)
-                                makeCellSelected(cell)
+                        if (daysOfOneMonth.selected) {
+                            val date =
+                                PersianCalendar(daysOfOneMonth.year, daysOfOneMonth.month, day)
+
+                            if (date == selectedDate) makeCellSelected(cell)
                         }
                     }
 
@@ -182,8 +175,8 @@ class CalendarAdapter(private val listener: OnDaySelectListener) :
             val day = cell.text.toString().toInt()
 
             val date = PersianCalendar(
-                mDaysOfOneMonth.year,
-                mDaysOfOneMonth.month,
+                daysOfOneMonth.year,
+                daysOfOneMonth.month,
                 day
             )
 

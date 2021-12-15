@@ -63,7 +63,6 @@ afterEvaluate{
         repositories{
 
             maven{
-                name ="persiandatepicker"
                 url = uri("https://maven.pkg.github.com/SkybirdBits/PersianDatePicker")
 
                 credentials{
